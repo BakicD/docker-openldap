@@ -19,12 +19,14 @@ script:
   - dscripts/run.sh -ipV /tests/init_sample_config_phoAt.sh
   - dscripts/run.sh -pV  # start slapd in background
   - sleep 2
+  - dscripts/exec.sh
   - dscripts/exec.sh /tests/init_sample_data_phoAt.sh
   - dscripts/exec.sh /tests/dump_testuser.sh
   - dscripts/exec.sh /tests/authn_testuser.sh
   - dscripts/exec.sh python3.4 /tests/test1.py
 
 after_success:
-#  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" || travis_terminate $?;
-#  - docker push $IMAGENAME; || travis_terminate $?;
-#  - echo "pushed $IMAGENAME to docker hub";
+  - if [ "$TRAVIS_BRANCH" == "unittest" ]; then
+    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" || travis_terminate $?;
+    docker push $IMAGENAME; || travis_terminate $?;
+    echo "pushed $IMAGENAME to docker hub";
