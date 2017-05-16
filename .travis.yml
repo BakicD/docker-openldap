@@ -25,7 +25,7 @@ script:
   - dscripts/exec.sh python3.4 /tests/test1.py
 
 after_success:
-  - if [ $TRAVIS_BRANCH" == "unittest" ]; then
-    docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" || travis_terminate $?;
-    docker push $IMAGENAME; || travis_terminate $?;
-    echo "pushed $IMAGENAME to docker hub";
+  # - if [ $TRAVIS_BRANCH" == "unittest" ]; then
+  #  docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD" || travis_terminate $?;
+  #  docker push $IMAGENAME; || travis_terminate $?;
+  #  echo "pushed $IMAGENAME to docker hub";
