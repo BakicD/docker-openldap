@@ -17,13 +17,14 @@ before_script:
 
 script:
   - dscripts/run.sh -ipV /tests/init_sample_config_phoAt.sh
-  - dscripts/run.sh -pV  # start slapd in background
+  - dscripts/run.sh -ipV /tests/init_sample_config_phoAt2.sh
+  - dscripts/run.sh -pV  # run slapd in background
   - sleep 2
-  - dscripts/exec.sh
   - dscripts/exec.sh /tests/init_sample_data_phoAt.sh
   - dscripts/exec.sh /tests/dump_testuser.sh
   - dscripts/exec.sh /tests/authn_testuser.sh
   - dscripts/exec.sh python3.4 /tests/test1.py
+  # TODO  - dscripts/exec.sh python 3.4 /tests/pyunittest.py
 
 after_success:
   # - if [ "$TRAVIS_BRANCH" == "unittest" ]; then
