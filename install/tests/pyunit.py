@@ -33,13 +33,15 @@ class Init:
 
 
 class test_slapd2(unittest.TestCase):
+    wrong_port = 8899
+
     def setUp(self):
         logger = logging.getLogger()
         logger.level = logging.DEBUG
         self.stream_handler = logging.StreamHandler(sys.stdout)
         logger.addHandler(self.stream_handler)
-        logging.getLogger().info("Binding with right credentials..")
         self.ldapserver = Init('cn=admin,dc=at', 'changeit')
+
 
     # def test_empty(self):
     #    return
@@ -75,6 +77,11 @@ class test_slapd2(unittest.TestCase):
             self.assertEqual(self.ldapserver.port2, 9389)
         except LDAPInvalidPortError:
             self.fail('SLAPD2 Port is wrong!')
+
+    def test_wrong_port(self):
+        logging.getLogger().info("Trying to connect with wrong port...")
+        self.assertNotEqual(self.ldapserver.port1, self.wrong_port)
+
 
     # @unittest.skipIf(Init.trig1 == 0, "Skipping data test due to previous failed test...")
     def test_data1(self):

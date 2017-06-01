@@ -3,8 +3,6 @@ language: c
 branches:
   only:
     - unittest
-    - master
-    - qa
 
 sudo: required
 services:
